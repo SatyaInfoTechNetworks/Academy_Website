@@ -31,6 +31,12 @@ public class SitemapController {
         if (baseUrl.contains(",")) {
             baseUrl = baseUrl.split(",")[0]; // Take first origin
         }
+        
+        // If ALLOWED_ORIGINS was set to '*' for CORS testing, we MUST use the real domain for the sitemap
+        if (baseUrl.trim().equals("*")) {
+            baseUrl = "https://academy.satyainfotechnetworks.com";
+        }
+        
         if (baseUrl.endsWith("/")) {
             baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
         }
