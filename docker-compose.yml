@@ -9,8 +9,6 @@ services:
       # This password will be set when the new volume is created
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-Qwert123}
       MYSQL_DATABASE: academy_db
-    ports:
-      - "3306:3306"
     volumes:
       # CHANGING VOLUME NAME FORCES A FRESH DATABASE
       - mysql_data_final:/var/lib/mysql
