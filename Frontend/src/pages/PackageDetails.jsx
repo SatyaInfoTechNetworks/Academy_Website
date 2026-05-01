@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../config';
+import SEO from '../components/SEO';
 
 const PackageDetails = () => {
     const { id } = useParams();
@@ -43,8 +44,30 @@ const PackageDetails = () => {
         );
     }
 
+    const courseSchema = pkg ? {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": pkg.title,
+        "description": pkg.description,
+        "provider": {
+            "@type": "Organization",
+            "name": "SatyaInfotech Academy",
+            "sameAs": "https://satyainfotech.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": pkg.price,
+            "priceCurrency": "INR"
+        }
+    } : null;
+
     return (
         <div className="package-details-page">
+            <SEO 
+                title={pkg.title} 
+                description={pkg.description} 
+                schema={courseSchema} 
+            />
             <section className="hero about-hero" style={{ minHeight: '65vh', padding: '6rem 2rem' }}>
                 <div className="hero-container">
                     <div className="hero-content">

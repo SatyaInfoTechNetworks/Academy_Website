@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../config';
+import SEO from '../components/SEO';
 
 const Home = ({ packages, stats, successStories, digitalProducts }) => {
     const navigate = useNavigate();
@@ -50,8 +51,21 @@ const Home = ({ packages, stats, successStories, digitalProducts }) => {
         { question: "Is it accessible forever?", answer: "Yes! One-time payment gets you lifetime access to the package and all future updates." }
     ]);
 
+    const organizationSchema = {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "SatyaInfotech Academy",
+        "url": "https://satyainfotech.com",
+        "description": config.heroSubtitle || 'Stop learning theories. Start building a career that gives you financial freedom.'
+    };
+
     return (
         <>
+            <SEO 
+                title="Home" 
+                description={config.heroSubtitle || 'Stop learning theories. Start building a career that gives you financial freedom.'} 
+                schema={organizationSchema} 
+            />
             <section className="hero">
                 <div className="hero-container">
                     <div className="hero-image-wrapper">

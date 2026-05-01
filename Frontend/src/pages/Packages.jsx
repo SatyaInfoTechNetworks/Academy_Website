@@ -1,10 +1,35 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Packages = ({ packages }) => {
     const navigate = useNavigate();
+
+    const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": packages && packages.length > 0 ? packages.map((pkg, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+                "@type": "Course",
+                "name": pkg.title,
+                "description": pkg.description,
+                "provider": {
+                    "@type": "Organization",
+                    "name": "SatyaInfotech Academy"
+                }
+            }
+        })) : []
+    };
+
     return (
         <div className="packages-page">
+            <SEO 
+                title="Our Packages" 
+                description="Pick a path and master high-income skills in as little as 4 weeks." 
+                schema={itemListSchema} 
+            />
             <section className="hero about-hero" style={{ minHeight: '40vh' }}>
                 <div className="hero-container" style={{ textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
                     <div className="hero-content" style={{ maxWidth: '900px', margin: '0 auto' }}>

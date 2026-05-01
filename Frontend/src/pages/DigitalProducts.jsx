@@ -1,11 +1,36 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const DigitalProducts = ({ products }) => {
     const navigate = useNavigate();
 
+    const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": products && products.length > 0 ? products.map((product, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+                "@type": "Product",
+                "name": product.title,
+                "description": product.description,
+                "offers": {
+                    "@type": "Offer",
+                    "price": product.price,
+                    "priceCurrency": "INR"
+                }
+            }
+        })) : []
+    };
+
     return (
         <div className="packages-page">
+            <SEO 
+                title="Digital Products" 
+                description="Premium guides, toolkits, and resources to accelerate your growth." 
+                schema={itemListSchema} 
+            />
             <section className="hero about-hero" style={{ minHeight: '40vh' }}>
                 <div className="hero-container" style={{ textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
                     <div className="hero-content" style={{ maxWidth: '900px', margin: '0 auto' }}>
